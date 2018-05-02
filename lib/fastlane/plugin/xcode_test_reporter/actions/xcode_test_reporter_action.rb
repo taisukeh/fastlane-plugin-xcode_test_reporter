@@ -6,6 +6,9 @@ module Fastlane
   module Actions
     class XcodeTestReporterAction < Action
       def self.run(params)
+        params[:path] ||= Actions.lane_context[Actions::SharedValues::SCAN_GENERATED_PLIST_FILE] if Actions.lane_context[Actions::SharedValues::SCAN_GENERATED_PLIST_FILE]
+        params[:path] ||= Actions.lane_context[Actions::SharedValues::SCAN_DERIVED_DATA_PATH] if Actions.lane_context[Actions::SharedValues::SCAN_DERIVED_DATA_PATH]
+
         options = {}
         options['--output-directory'] = params[:output_directory] if params[:output_directory]
         options['--path'] = params[:path] if params[:path]

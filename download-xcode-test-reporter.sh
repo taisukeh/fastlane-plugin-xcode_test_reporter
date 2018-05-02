@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-tag=0.0.3
+tag=0.0.4
 
 set -eu
 

@@ -13,3 +13,4 @@ test-results
 /vendor
 /.temp
 /bin/xcode-test-reporter
+/.bundle

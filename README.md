@@ -2,8 +2,6 @@
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-xcode_test_reporter)
 
-Fastlane plugin for [Xcode Test Reporter](https://github.com/taisukeh/xcode-test-reporter).
-
 ## Getting Started
 
 This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-xcode_test_reporter`, add it to your project by running:
@@ -14,16 +12,22 @@ fastlane add_plugin xcode_test_reporter
 
 ## About xcode_test_reporter
 
-Generates JUnit or HTML report from Xcode `plist` test report files.
+Fastlane plugin for [Xcode Test Reporter](https://github.com/taisukeh/xcode-test-reporter).
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+This plugin generates JUnit or HTML report from Xcode `plist` test report files using.
 
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
 
 ```
+lane :test do
+  run_test(scheme: "ThemojiUITests", 
+           output_types: "", 
+           fail_build: false)
 
+  xcode_test_reporter(output_directory: ".", format: "junit,html")
+end
 ```
 
 ## Run tests for this plugin

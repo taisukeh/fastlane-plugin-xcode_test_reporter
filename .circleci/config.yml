@@ -41,3 +41,51 @@ jobs:
       - store_artifacts:
           path: ~/repo/test-results
           destination: test-results
+
+  deploy:
+    machine:
+        enabled: true
+    working_directory: ~/repo
+    environment:
+      HEROKU_APP: "sleepy-refuge-55486"
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: bundle check || bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - run:
+          name: Init gems
+          command: curl -u taisukeh:$RUBYGEMS_API_KEY https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials; chmod 0600 ~/.gem/credentials
+
+      - run:
+          name: Init git
+          command: |
+             git config user.name HORI Taisuke
+             git config user.email taisuke.horix@gmail.com
+
+      - run:
+          name: bundle release
+          command: |
+             bundle exec rake build
+             bundle exec rake release
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy: # deployはbuildのあとに実行
+          requires:
+            - build
+          filters: # developブランチの場合のみデプロイする
+            branches:
+              only: master

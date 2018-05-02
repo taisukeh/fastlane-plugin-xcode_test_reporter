@@ -11,7 +11,7 @@ module Fastlane
         options['--path'] = params[:path] if params[:path]
         options['--format'] = params[:format] if params[:format]
 
-        options_str = options.map {|k, v| "#{k} #{v.shellescape}" }.join(" ")
+        options_str = options.map { |k, v| "#{k} #{v.shellescape}" }.join(' ')
 
         command = "#{xcode_reporter_path} #{options_str}"
 
@@ -57,7 +57,7 @@ module Fastlane
                                        description: "The report format to output for (one of 'html', 'junit', or comma-separated values). (default: junit)",
                                        default_value: "junit",
                                        optional: true,
-                                       type: String),
+                                       type: String)
         ]
       end
 

@@ -70,6 +70,7 @@ jobs:
             --
             :rubygems_api_key: $RUBYGEMS_API_KEY
             EOL
+            chmod 600 ~/.gem/credentials
       - run:
           name: Init git
           command: |

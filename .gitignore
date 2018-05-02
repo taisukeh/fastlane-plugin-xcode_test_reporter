@@ -11,4 +11,5 @@ fastlane/report.xml
 coverage
 test-results
 /vendor
-
+/.temp
+/bin/xcode-test-reporter

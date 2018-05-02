@@ -28,7 +28,7 @@ module Fastlane
       end
 
       def self.description
-        "Generates JUnit or HTML report from Xcode `plist` test report files."
+        "Generates JUnit or HTML report from Xcode `plist` test report files"
       end
 
       def self.authors

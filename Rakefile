@@ -18,7 +18,7 @@ task(:bump_release) do
 
     versions = version.split('.')
     new_version = "#{versions[0]}.#{versions[1]}.#{versions[2].to_i + 1}"
-    `sed -i -e /#{version}/#{new_version}/ #{version_file}`
+    `sed -i -e s/#{version}/#{new_version}/ #{version_file}`
     fail unless $?.success?
 
     `git add #{version_file} && git commit -m '[skip ci] bump version #{new_version} && git push`

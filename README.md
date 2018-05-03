@@ -1,6 +1,7 @@
 # xcode_test_reporter plugin
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-xcode_test_reporter)
+[![CircleCI](https://circleci.com/gh/taisukeh/fastlane-plugin-xcode_test_reporter.svg?style=svg)](https://circleci.com/gh/taisukeh/fastlane-plugin-xcode_test_reporter)
 
 ## Getting Started
 

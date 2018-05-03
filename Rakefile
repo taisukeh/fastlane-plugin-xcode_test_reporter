@@ -14,14 +14,14 @@ task(:bump_release) do
   fail unless $?.success?
 
   if latest_version == "v#{version}"
-    version_file = "lib/fastlane/plugin/xcode_test_reporter/version"
+    version_file = "lib/fastlane/plugin/xcode_test_reporter/version.rb"
 
     versions = version.split('.')
     new_version = "#{versions[0]}.#{versions[1]}.#{versions[2].to_i + 1}"
     `sed -i -e s/#{version}/#{new_version}/ #{version_file}`
     fail unless $?.success?
 
-    `git add #{version_file} && git commit -m '[skip ci] bump version #{new_version} && git push`
+    `git add #{version_file} && git commit -m '[skip ci] bump version #{new_version}' && git push`
     fail unless $?.success?
   end
 

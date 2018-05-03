@@ -23,9 +23,8 @@ Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plu
 
 ```
 lane :test do
-  run_test(scheme: "ThemojiUITests", 
-           output_types: "", 
-           fail_build: false)
+  run_tests(scheme: "ThemojiUITests",
+            fail_build: false)
 
   xcode_test_reporter(output_directory: ".", format: "junit,html")
 end

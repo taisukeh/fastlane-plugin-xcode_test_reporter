@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.0.0] - 2018-05-03
+## [1.0.0] - 2018-05-04
 ### Added
 - Initial release
 - Use xcode-test-reporter 1.0.0

@@ -70,12 +70,7 @@ jobs:
       - run:
           name: Init gems
           command: |
-            mkdir -p ~/.gem
-            cat << EOL > ~/.gem/credentials
-            --
-            :rubygems_api_key: $RUBYGEMS_API_KEY
-            EOL
-            chmod 600 ~/.gem/credentials
+            curl -u taisukeh:"$RUBY_GEMS_PASSWORD" https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials; chmod 0600 ~/.gem/credentials
       - run:
           name: Init git
           command: |

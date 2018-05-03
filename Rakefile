@@ -8,12 +8,12 @@ RuboCop::RakeTask.new(:rubocop)
 
 require 'fastlane/plugin/xcode_test_reporter/version'
 
-task :bump_release do
+task(:bump_release) do
   version = Fastlane::XcodeTestReporter::VERSION
   latest_version = `curl -L -s https://api.github.com/repos/taisukeh/fastlane-plugin-xcode_test_reporter/tags | jq -r '.[0].name'`.strip
   fail unless $?.success?
 
-  if "v#{version}" == latest_version
+  if latest_version == "v#{version}"
     version_file = "lib/fastlane/plugin/xcode_test_reporter/version"
 
     versions = version.split('.')

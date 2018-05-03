@@ -27,12 +27,17 @@ module Fastlane
           UI.user_error!("xcode-test-reporter command failed.")
         end
 
+        resultJson = JSON.parse(resultText)
+
         result = {}
-        JSON.parse(resultText).each
-        result.each do |report|
+
+        resultJson.each do |report|
           result[report["file"]] = report["success"]
-          UI.message "Generated: #{report["file"]}"
-          UI.test_failure!("Tests failed") if fail_build && !report["success"]
+          UI.message "Generated: #{report["file"]}, success?: #{report["success"]}"
+        end
+
+        resultJson.each do |report|
+          UI.test_failure!("Tests failed") if params[:fail_build] && !report["success"]
         end
 
         return result
@@ -51,10 +56,10 @@ module Fastlane
       end
 
       def self.return_value
+        "A hash with the key being the path of the generated file, the value being if the tests were successful"
       end
 
       def self.details
-        # Optional:
         "The `Xcode Test Reporter` Generates JUnit or HTML report from Xcode `plist` test report files."
       end
 
@@ -73,7 +78,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :format,
                                        env_name: "XCODE_TEST_REPORTER_FORMAT",
                                        description: "The report format to output for (one of 'html', 'junit', or comma-separated values)",
-                                       default_value: "junit",
+                                       default_value: "junit,html",
                                        optional: true,
                                        type: String),
           FastlaneCore::ConfigItem.new(key: :fail_build,
@@ -81,7 +86,7 @@ module Fastlane
                                        description: "Should this step stop the build if the tests fail?",
                                        default_value: false,
                                        optional: true,
-                                       type: String)
+                                       type: Boolean)
         ]
       end
 

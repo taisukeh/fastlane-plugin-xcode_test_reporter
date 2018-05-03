@@ -17,34 +17,34 @@ module Fastlane
         options['--output-json'] = true
 
         options_str = options.map do |k, v|
-          v.is_a?(String) ? "#{k} #{v.shellescape}" : "#{k}"
+          v.kind_of?(String) ? "#{k} #{v.shellescape}" : k
         end.join(' ')
 
         command = "#{xcode_reporter_path} #{options_str}"
 
-        resultText = `#{command}`
+        result_text = `#{command}`
         unless $?.success?
-          UI.user_error!("xcode-test-reporter command failed.")
+          UI.user_error!('xcode-test-reporter command failed.')
         end
 
-        resultJson = JSON.parse(resultText)
+        result_json = JSON.parse(result_text)
 
         result = {}
 
-        resultJson.each do |report|
-          result[report["file"]] = report["success"]
-          UI.message "Generated: #{report["file"]}, success?: #{report["success"]}"
+        result_json.each do |report|
+          result[report['file']] = report['success']
+          UI.message("Generated: #{report['file']}, success?: #{report['success']}")
         end
 
-        resultJson.each do |report|
-          UI.test_failure!("Tests failed") if params[:fail_build] && !report["success"]
+        result_json.each do |report|
+          UI.test_failure!('Tests failed') if params[:fail_build] && !report['success']
         end
 
         return result
       end
 
       def self.xcode_reporter_path
-        __dir__ + "/../../../../../bin/xcode-test-reporter"
+        __dir__ + '/../../../../../bin/xcode-test-reporter'
       end
 
       def self.description

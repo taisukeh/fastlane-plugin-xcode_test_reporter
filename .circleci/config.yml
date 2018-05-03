@@ -30,6 +30,11 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "Gemfile" }}
 
+      - run:
+          name: download xcode test reporter
+          command: |
+             ./download-xcode-test-reporter.sh
+
       # run tests!
       - run:
           name: run tests

@@ -83,7 +83,7 @@ jobs:
              ./download-xcode-test-reporter.sh
              bundle exec rake build
              git status
-             bundle exec rake release
+             bundle exec rake bump_release
 
 workflows:
   version: 2

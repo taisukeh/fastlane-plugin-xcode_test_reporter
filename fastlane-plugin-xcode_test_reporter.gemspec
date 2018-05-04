@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/taisukeh/fastlane-plugin-xcode_test_reporter"
   spec.license       = "MIT"
 
-  spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
+  spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE) + Dir["bin/**/*"]
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
